@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Emmanuel M. Y. BANKOLE — Analyste Programmeur et Développeur Web, fondateur ETS LGT. Solutions digitales au Bénin.">
+  <title>Emmanuel M. Y. BANKOLE — Analyste Programmeur | ETS LGT</title>
+  <style>
+    /* RESET */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+
+    /* VARIABLES */
+    :root {
+      --navy:   #091929;
+      --card:   #0f2537;
+      --amber:  #c8862a;
+      --amberh: #d9952f;
+      --blue:   #2563eb;
+      --light:  #f6f4f0;
+      --light2: #edeae4;
+      --white:  #ffffff;
+      --ink:    #0d1e2c;
+      --muted:  #5a6472;
+      --border: #ddd9d1;
+    }
+
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, Arial, sans-serif;
+      background: var(--light);
+      color: var(--ink);
+      overflow-x: hidden;
+      line-height: 1.65;
+    }
+
+    a { color: var(--blue); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    :focus-visible { outline: 2px solid var(--amber); outline-offset: 3px; border-radius: 4px; }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition-duration: .01ms !important; }
+    }
+
+    /* CONTAINER */
+    .wrap {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 clamp(1.25rem, 5vw, 3rem);
+    }
+
+    /* ===== NAV ===== */
+    .nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: rgba(9, 25, 41, 0.93);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(200,134,42,0.15);
+      transition: box-shadow .3s;
+    }
+    .nav.scrolled { box-shadow: 0 4px 20px rgba(0,0,0,0.5); }
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 56px;
+    }
+    .nav-brand { line-height: 1.2; }
+    .nav-brand .nb-name { font-size: .9rem; font-weight: 700; color: #fff; letter-spacing: -.01em; }
+    .nav-brand .nb-co   { font-size: .64rem; color: var(--amber); letter-spacing: .09em; text-transform: uppercase; font-weight: 600; }
+    .nav-links { display: flex; gap: 1.75rem; list-style: none; }
+    .nav-links a { color: rgba(255,255,255,.6); font-size: .82rem; font-weight: 500; transition: color .2s; }
+    .nav-links a:hover { color: #fff; text-decoration: none; }
+    .nav-cta {
+      background: var(--amber) !important;
+      color: var(--navy) !important;
+      padding: .38rem 1rem;
+      border-radius: 6px;
+      font-weight: 700 !important;
+      transition: background .2s, transform .15s;
+      display: inline-block;
+    }
+    .nav-cta:hover { background: var(--amberh) !important; transform: translateY(-1px); text-decoration: none; }
+    @media (max-width: 600px) { .nav-links { display: none; } }
+
+    /* ===== HERO ===== */
+    .hero {
+      min-height: 100vh;
+      background: var(--navy);
+      display: flex;
+      align-items: center;
+      padding-top: 56px;
+      position: relative;
+      overflow: hidden;
+    }
+    /* grille de points */
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(circle, rgba(200,134,42,.22) 1.5px, transparent 1.5px);
+      background-size: 28px 28px;
+      -webkit-mask-image: radial-gradient(ellipse 80% 80% at 75% 50%, black 15%, transparent 70%);
+      mask-image: radial-gradient(ellipse 80% 80% at 75% 50%, black 15%, transparent 70%);
+    }
+    /* monogramme fantôme */
+    .hero-ghost {
+      position: absolute;
+      right: -0.05em;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: clamp(11rem, 22vw, 22rem);
+      font-weight: 900;
+      color: transparent;
+      -webkit-text-stroke: 1px rgba(200,134,42,.07);
+      line-height: 1;
+      letter-spacing: -.05em;
+      pointer-events: none;
+      user-select: none;
+    }
+    .hero-content { position: relative; z-index: 2; max-width: 660px; }
+
+    .hero-pre {
+      display: inline-flex;
+      align-items: center;
+      gap: .6rem;
+      font-size: .68rem;
+      font-weight: 600;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      color: var(--amber);
+      margin-bottom: 1.4rem;
+    }
+    .hero-pre::before {
+      content: '';
+      display: block;
+      width: 26px; height: 2px;
+      background: var(--amber);
+    }
+
+    .hero-name {
+      font-size: clamp(2.8rem, 6.5vw, 5.5rem);
+      font-weight: 900;
+      line-height: 1.02;
+      letter-spacing: -.025em;
+      color: #fff;
+    }
+    .hero-prenom {
+      display: block;
+      font-size: .46em;
+      font-weight: 400;
+      letter-spacing: .015em;
+      color: rgba(255,255,255,.5);
+      margin-bottom: .1em;
+    }
+    .hero-nom {
+      display: block;
+      width: fit-content;
+      border-bottom: 3px solid var(--amber);
+      padding-bottom: .08em;
+    }
+
+    .hero-desc {
+      margin-top: 1.4rem;
+      margin-bottom: 2.4rem;
+      font-size: clamp(.95rem, 2vw, 1.1rem);
+      color: rgba(255,255,255,.47);
+      line-height: 1.65;
+      max-width: 460px;
+    }
+    .hero-desc strong { color: rgba(255,255,255,.8); font-weight: 600; }
+
+    .hero-btns { display: flex; flex-wrap: wrap; gap: .8rem; }
+
+    .btn {
+      display: inline-flex; align-items: center; gap: .45rem;
+      padding: .7rem 1.35rem;
+      border-radius: 8px;
+      font-weight: 600; font-size: .875rem;
+      border: none; cursor: pointer;
+      transition: transform .15s, box-shadow .2s, background .2s;
+      line-height: 1;
+    }
+    .btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,.25); text-decoration: none; }
+    .btn-amber { background: var(--amber); color: var(--navy); }
+    .btn-amber:hover { background: var(--amberh); }
+    .btn-ghost {
+      background: rgba(255,255,255,.07);
+      color: rgba(255,255,255,.8);
+      border: 1px solid rgba(255,255,255,.13);
+    }
+    .btn-ghost:hover { background: rgba(255,255,255,.12); }
+
+    .scroll-hint {
+      position: absolute;
+      bottom: 1.75rem; left: 50%;
+      transform: translateX(-50%);
+      display: flex; flex-direction: column; align-items: center; gap: .35rem;
+      color: rgba(255,255,255,.22);
+      font-size: .6rem; letter-spacing: .12em; text-transform: uppercase;
+      animation: floatY 2.5s ease-in-out infinite;
+    }
+    @keyframes floatY {
+      0%,100% { transform: translateX(-50%) translateY(0); }
+      50%      { transform: translateX(-50%) translateY(7px); }
+    }
+
+    /* ===== ABOUT ===== */
+    .about { background: var(--light); padding: clamp(4rem,9vw,7rem) 0; }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(2.5rem, 6vw, 5rem);
+      align-items: center;
+    }
+    @media (max-width: 640px) { .about-grid { grid-template-columns: 1fr; } }
+
+    .eyebrow {
+      font-size: .68rem;
+      font-weight: 700;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      color: var(--amber);
+      margin-bottom: .65rem;
+    }
+
+    .section-title {
+      font-size: clamp(1.75rem, 4vw, 2.6rem);
+      font-weight: 800;
+      letter-spacing: -.02em;
+      line-height: 1.12;
+      margin-bottom: 1.1rem;
+      color: var(--ink);
+    }
+    .section-title.light { color: #fff; }
+
+    .about-bio { color: var(--muted); font-size: .975rem; line-height: 1.8; }
+    .about-bio strong { color: var(--ink); font-weight: 600; }
+
+    .stats-col { display: flex; flex-direction: column; gap: 1rem; }
+
+    .stat-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.1rem 1.35rem;
+      display: flex; align-items: center; gap: 1.1rem;
+      box-shadow: 0 2px 12px rgba(9,25,41,.07);
+      transition: border-color .2s, box-shadow .2s, transform .2s;
+    }
+    .stat-card:hover {
+      border-color: var(--amber);
+      box-shadow: 0 4px 20px rgba(200,134,42,.12);
+      transform: translateY(-2px);
+    }
+    .stat-ic {
+      width: 42px; height: 42px; flex-shrink: 0;
+      background: rgba(200,134,42,.1);
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--amber);
+    }
+    .stat-num {
+      font-size: 1.6rem; font-weight: 900; line-height: 1;
+      color: var(--ink); letter-spacing: -.02em;
+    }
+    .stat-lbl { font-size: .79rem; color: var(--muted); margin-top: .15rem; }
+
+    /* ===== SERVICES ===== */
+    .services { background: var(--navy); padding: clamp(4rem,9vw,7rem) 0; }
+
+    .svc-header { margin-bottom: clamp(2rem,4vw,3rem); }
+
+    .svc-grid {
+      display: grid;
+      grid-template-columns: repeat(3,1fr);
+      gap: 1rem;
+    }
+    @media (max-width: 760px) { .svc-grid { grid-template-columns: repeat(2,1fr); } }
+    @media (max-width: 460px) { .svc-grid { grid-template-columns: 1fr; } }
+
+    .svc-card {
+      background: rgba(255,255,255,.04);
+      border: 1px solid rgba(255,255,255,.07);
+      border-radius: 12px;
+      padding: 1.6rem;
+      position: relative; overflow: hidden;
+      transition: background .2s, border-color .2s, transform .2s;
+    }
+    .svc-card::after {
+      content: '';
+      position: absolute; bottom: 0; left: 0; right: 0; height: 2px;
+      background: var(--amber);
+      transform: scaleX(0); transform-origin: left;
+      transition: transform .3s;
+    }
+    .svc-card:hover { background: rgba(255,255,255,.07); border-color: rgba(200,134,42,.25); transform: translateY(-3px); }
+    .svc-card:hover::after { transform: scaleX(1); }
+
+    .svc-ic {
+      width: 40px; height: 40px;
+      background: rgba(200,134,42,.12);
+      border-radius: 9px;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--amber);
+      margin-bottom: .9rem;
+    }
+    .svc-title { font-size: .93rem; font-weight: 700; color: #fff; margin-bottom: .4rem; }
+    .svc-desc  { font-size: .81rem; color: rgba(255,255,255,.42); line-height: 1.65; }
+
+    /* ===== RÉALISATIONS ===== */
+    .project { background: var(--light2); padding: clamp(4rem,9vw,7rem) 0; }
+
+    .section-sub {
+      color: var(--muted); font-size: .93rem;
+      margin-top: -.3rem; margin-bottom: .5rem; line-height: 1.6;
+    }
+
+    .apps-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.2rem;
+      margin-top: 2rem;
+    }
+    @media (max-width: 860px) { .apps-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 520px) { .apps-grid { grid-template-columns: 1fr; } }
+
+    .app-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 2px 12px rgba(9,25,41,.06);
+      transition: transform .2s, box-shadow .2s;
+    }
+    .app-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 10px 30px rgba(9,25,41,.13);
+    }
+
+    .app-visual {
+      background: var(--cc, #c8862a);
+      padding: 1.4rem 1.5rem;
+      display: flex; align-items: center; gap: 1rem;
+      position: relative; overflow: hidden;
+    }
+    .app-visual::before {
+      content: '';
+      position: absolute; inset: 0;
+      background-image: radial-gradient(circle, rgba(255,255,255,.13) 1px, transparent 1px);
+      background-size: 18px 18px;
+    }
+    .app-ic {
+      width: 46px; height: 46px; flex-shrink: 0;
+      background: rgba(255,255,255,.18);
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      color: #fff;
+      position: relative; z-index: 2;
+    }
+    .app-abbr {
+      font-size: 1.7rem; font-weight: 900;
+      color: rgba(255,255,255,.92); letter-spacing: -.04em; line-height: 1;
+      position: relative; z-index: 2;
+    }
+
+    .app-body { padding: 1.2rem 1.3rem; }
+    .app-sector {
+      font-size: .62rem; font-weight: 700;
+      letter-spacing: .09em; text-transform: uppercase;
+      color: var(--cc, var(--amber)); margin-bottom: .4rem;
+    }
+    .app-name {
+      font-size: .98rem; font-weight: 800;
+      color: var(--ink); margin-bottom: .38rem; letter-spacing: -.01em;
+    }
+    .app-desc { font-size: .8rem; color: var(--muted); line-height: 1.65; }
+
+    /* Formation banner */
+    .formation-card {
+      margin-top: 1.4rem;
+      background: var(--navy);
+      border: 1px solid rgba(200,134,42,.2);
+      border-radius: 16px;
+      padding: 1.75rem 2rem;
+      display: flex; align-items: center; gap: 1.75rem; flex-wrap: wrap;
+    }
+    .form-ic {
+      width: 58px; height: 58px; flex-shrink: 0;
+      background: rgba(200,134,42,.12);
+      border-radius: 15px;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--amber);
+    }
+    .form-body { flex: 1; min-width: 180px; }
+    .form-title { font-size: 1.05rem; font-weight: 800; color: #fff; margin-bottom: .3rem; letter-spacing: -.01em; }
+    .form-desc  { font-size: .83rem; color: rgba(255,255,255,.48); line-height: 1.65; }
+    .form-tags  { display: flex; flex-wrap: wrap; gap: .45rem; margin-top: .85rem; }
+    .form-tag {
+      background: rgba(200,134,42,.1); border: 1px solid rgba(200,134,42,.22);
+      color: var(--amber); font-size: .68rem; font-weight: 600;
+      padding: .26rem .78rem; border-radius: 100px;
+    }
+
+    /* ===== CONTACT ===== */
+    .contact { background: var(--light); padding: clamp(4rem,9vw,7rem) 0; }
+
+    .contact-head { margin-bottom: 2.4rem; }
+    .contact-head p { color: var(--muted); margin-top: .6rem; font-size: .95rem; max-width: 440px; }
+
+    .ct-grid {
+      display: grid;
+      grid-template-columns: repeat(3,1fr);
+      gap: 1.1rem;
+      margin-bottom: 2.5rem;
+    }
+    @media (max-width: 600px) { .ct-grid { grid-template-columns: 1fr; } }
+
+    .ct-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.75rem 1.5rem;
+      text-align: center;
+      box-shadow: 0 2px 12px rgba(9,25,41,.06);
+      transition: border-color .2s, box-shadow .2s, transform .2s;
+    }
+    .ct-card:hover { border-color: var(--amber); box-shadow: 0 6px 24px rgba(200,134,42,.12); transform: translateY(-3px); }
+
+    .ct-ic {
+      width: 50px; height: 50px; border-radius: 14px;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto .9rem;
+    }
+    .ct-ic.am { background: rgba(200,134,42,.1); color: var(--amber); }
+    .ct-ic.gr { background: rgba(34,197,94,.1);  color: #22c55e; }
+    .ct-ic.bl { background: rgba(37,99,235,.1);  color: var(--blue); }
+
+    .ct-lbl { font-size: .65rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); margin-bottom: .35rem; }
+    .ct-val { font-size: .88rem; font-weight: 600; color: var(--ink); line-height: 1.55; }
+    .ct-val a { color: var(--ink); }
+    .ct-val a:hover { color: var(--blue); }
+    .ct-val .sec { display: block; font-size: .78rem; color: var(--muted); font-weight: 400; margin-top: .15rem; }
+
+    .cta-center { text-align: center; }
+    .btn-navy { background: var(--navy); color: #fff; }
+    .btn-navy:hover { background: #0f2537; }
+
+    /* ===== FOOTER ===== */
+    footer {
+      background: var(--navy);
+      padding: 1.75rem 0;
+      border-top: 1px solid rgba(200,134,42,.12);
+    }
+    .foot-inner {
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: .75rem;
+    }
+    .foot-brand { font-size: .84rem; color: rgba(255,255,255,.5); }
+    .foot-brand span { color: var(--amber); font-weight: 700; }
+    .foot-copy  { font-size: .72rem; color: rgba(255,255,255,.25); }
+
+    /* SVG icons inline util */
+    svg { display: block; }
+  </style>
+</head>
+<body>
+
+<!-- ===== NAV ===== -->
+<nav class="nav" id="nav" role="navigation" aria-label="Navigation principale">
+  <div class="wrap nav-inner">
+    <a href="#" class="nav-brand" aria-label="Accueil">
+      <div class="nb-name">E. BANKOLE</div>
+      <div class="nb-co">ETS LGT</div>
+    </a>
+    <ul class="nav-links" role="list">
+      <li><a href="#about">À propos</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#projet">Réalisations</a></li>
+      <li><a href="#contact" class="nav-cta">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- ===== HERO ===== -->
+<section class="hero" id="top">
+  <span class="hero-ghost" aria-hidden="true">EB</span>
+  <div class="wrap">
+    <div class="hero-content">
+      <div class="hero-pre">Analyste Programmeur &amp; Développeur Web</div>
+      <h1 class="hero-name">
+        <span class="hero-prenom">Emmanuel M. Y.</span>
+        <span class="hero-nom">BANKOLE</span>
+      </h1>
+      <p class="hero-desc">
+        Fondateur de <strong>ETS LGT</strong> — solutions digitales sur mesure pour entreprises,
+        associations et institutions en <strong>Afrique de l'Ouest francophone</strong>.
+      </p>
+      <div class="hero-btns">
+        <a href="#contact" class="btn btn-amber">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 13 19.79 19.79 0 01.14 4.36 2 2 0 012.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.91 9.91a16 16 0 006.18 6.18l1.27-.45a2 2 0 012.11.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
+          Me contacter
+        </a>
+        <a href="#services" class="btn btn-ghost">
+          Mes services
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="scroll-hint" aria-hidden="true">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 10l5 5 5-5"/></svg>
+    Défiler
+  </div>
+</section>
+
+<!-- ===== ABOUT ===== -->
+<section class="about" id="about">
+  <div class="wrap">
+    <div class="about-grid">
+      <div>
+        <p class="eyebrow">À propos</p>
+        <h2 class="section-title">Votre partenaire<br>digital de confiance</h2>
+        <p class="about-bio">
+          Analyste programmeur et développeur web basé au <strong>Bénin</strong>,
+          j'accompagne depuis plus de 10 ans entreprises, associations et institutions
+          dans leur transformation numérique.<br><br>
+          Via <strong>ETS LGT</strong>, je conçois des logiciels sur mesure, forme vos équipes,
+          assure la maintenance de vos systèmes et crée votre identité graphique —
+          avec un engagement fort pour la qualité et la durabilité des solutions livrées.
+        </p>
+      </div>
+      <div class="stats-col">
+        <div class="stat-card">
+          <div class="stat-ic">
+            <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+          </div>
+          <div>
+            <div class="stat-num">10+</div>
+            <div class="stat-lbl">Années d'expérience en développement logiciel</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-ic">
+            <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+          </div>
+          <div>
+            <div class="stat-num">6</div>
+            <div class="stat-lbl">Domaines de services — du code au graphisme</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-ic">
+            <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
+          </div>
+          <div>
+            <div class="stat-num" style="font-size:1.15rem">Bénin</div>
+            <div class="stat-lbl">Afrique de l'Ouest — zone UEMOA francophone</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SERVICES ===== -->
+<section class="services" id="services">
+  <div class="wrap">
+    <div class="svc-header">
+      <p class="eyebrow">Ce que je fais</p>
+      <h2 class="section-title light">Mes services</h2>
+    </div>
+    <div class="svc-grid">
+
+      <article class="svc-card">
+        <div class="svc-ic"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg></div>
+        <div class="svc-title">Solutions SaaS</div>
+        <div class="svc-desc">Plateformes web hébergées sur mesure — gestion de membres, finances et cotisations — livrées clés en main.</div>
+      </article>
+
+      <article class="svc-card">
+        <div class="svc-ic"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg></div>
+        <div class="svc-title">Développement Web &amp; Mobile</div>
+        <div class="svc-desc">Sites vitrine, applications métier et interfaces sur mesure adaptées aux besoins réels de votre structure.</div>
+      </article>
+
+      <article class="svc-card">
+        <div class="svc-ic"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg></div>
+        <div class="svc-title">Conseil Digital</div>
+        <div class="svc-desc">Accompagnement stratégique dans le choix et le déploiement des bons outils numériques pour votre organisation.</div>
+      </article>
+
+      <article class="svc-card">
+        <div class="svc-ic"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg></div>
+        <div class="svc-title">Formation Informatique</div>
+        <div class="svc-desc">Sessions pratiques sur les outils numériques, langages de programmation et logiciels métier pour vos équipes.</div>
+      </article>
+
+      <article class="svc-card">
+        <div class="svc-ic"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg></div>
+        <div class="svc-title">Maintenance Informatique</div>
+        <div class="svc-desc">Support technique, suivi des systèmes, maintenance corrective et évolutive de vos applications et matériels.</div>
+      </article>
+
+      <article class="svc-card">
+        <div class="svc-ic"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="6.5" r=".5" fill="currentColor"/><circle cx="17.5" cy="10.5" r=".5" fill="currentColor"/><circle cx="8.5" cy="7.5" r=".5" fill="currentColor"/><circle cx="6.5" cy="12.5" r=".5" fill="currentColor"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 011.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"/></svg></div>
+        <div class="svc-title">Graphisme &amp; Communication</div>
+        <div class="svc-desc">Identité visuelle, charte graphique, supports de communication et design d'interfaces pour vos projets.</div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===== RÉALISATIONS ===== -->
+<section class="project" id="projet">
+  <div class="wrap">
+    <p class="eyebrow">Réalisations</p>
+    <h2 class="section-title">Applications développées</h2>
+    <p class="section-sub">Solutions métier complètes, livrées et opérationnelles dans différents secteurs.</p>
+
+    <div class="apps-grid">
+
+      <!-- Weziza Quincaillerie -->
+      <article class="app-card" style="--cc:#0d9488">
+        <div class="app-visual">
+          <div class="app-ic">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg>
+          </div>
+          <div class="app-abbr">WQ</div>
+        </div>
+        <div class="app-body">
+          <div class="app-sector">Commerce · Quincaillerie · MECEF</div>
+          <div class="app-name">Weziza Quincaillerie</div>
+          <div class="app-desc">Gestion complète d'une quincaillerie avec intégration MECEF — machine physique et module digital pour la conformité fiscale.</div>
+        </div>
+      </article>
+
+      <!-- Weziza Gestion -->
+      <article class="app-card" style="--cc:#16a34a">
+        <div class="app-visual">
+          <div class="app-ic">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+          </div>
+          <div class="app-abbr">WG</div>
+        </div>
+        <div class="app-body">
+          <div class="app-sector">Commerce · Boutiques · Achat / Vente</div>
+          <div class="app-name">Weziza Gestion</div>
+          <div class="app-desc">Solution polyvalente pour la gestion des boutiques — achats, ventes, stocks, caisse et tableau de bord synthétique.</div>
+        </div>
+      </article>
+
+      <!-- Weziza Sygec -->
+      <article class="app-card" style="--cc:#2563eb">
+        <div class="app-visual">
+          <div class="app-ic">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+          </div>
+          <div class="app-abbr">WS</div>
+        </div>
+        <div class="app-body">
+          <div class="app-sector">Éducation · Établissements scolaires</div>
+          <div class="app-name">Weziza Sygec</div>
+          <div class="app-desc">Système de gestion des écoles — bulletins, absences, notes, inscriptions et suivi pédagogique des élèves.</div>
+        </div>
+      </article>
+
+      <!-- Gestour -->
+      <article class="app-card" style="--cc:#b45309">
+        <div class="app-visual">
+          <div class="app-ic">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg>
+          </div>
+          <div class="app-abbr">GT</div>
+        </div>
+        <div class="app-body">
+          <div class="app-sector">Tourisme · Circuits · Voyages</div>
+          <div class="app-name">Gestour</div>
+          <div class="app-desc">Logiciel complet de gestion des circuits touristiques — réservations, itinéraires, clients et facturation intégrée.</div>
+        </div>
+      </article>
+
+      <!-- GestionPro -->
+      <article class="app-card" style="--cc:#7c3aed">
+        <div class="app-visual">
+          <div class="app-ic">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+          </div>
+          <div class="app-abbr">GP</div>
+        </div>
+        <div class="app-body">
+          <div class="app-sector">Commerce · Achat / Vente · Moderne</div>
+          <div class="app-name">GestionPro</div>
+          <div class="app-desc">Version améliorée et moderne de gestion commerciale — interface intuitive, reporting avancé et multi-utilisateurs.</div>
+        </div>
+      </article>
+
+      <!-- AssociationPro -->
+      <article class="app-card" style="--cc:#c8862a">
+        <div class="app-visual">
+          <div class="app-ic">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+          </div>
+          <div class="app-abbr">AP</div>
+        </div>
+        <div class="app-body">
+          <div class="app-sector">Associations · SaaS · Afrique de l'Ouest</div>
+          <div class="app-name">AssociationPro</div>
+          <div class="app-desc">Plateforme SaaS complète — membres, cotisations, finances, gouvernance et comptabilité pour associations francophones.</div>
+        </div>
+      </article>
+
+    </div>
+
+    <!-- Formation -->
+    <div class="formation-card">
+      <div class="form-ic">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg>
+      </div>
+      <div class="form-body">
+        <div class="form-title">Formations dispensées</div>
+        <div class="form-desc">Accompagnement de plusieurs promotions d'élèves et de professionnels dans les domaines clés de l'informatique appliquée.</div>
+        <div class="form-tags">
+          <span class="form-tag">Opérations de saisie</span>
+          <span class="form-tag">Bureautique</span>
+          <span class="form-tag">Maintenance informatique</span>
+          <span class="form-tag">Programmation</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ===== CONTACT ===== -->
+<section class="contact" id="contact">
+  <div class="wrap">
+    <div class="contact-head">
+      <p class="eyebrow">Contact</p>
+      <h2 class="section-title">Travaillons ensemble</h2>
+      <p>Disponible pour des projets de développement, formations ou missions de conseil. Contactez-moi directement par le canal de votre choix.</p>
+    </div>
+
+    <div class="ct-grid">
+      <div class="ct-card">
+        <div class="ct-ic am">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 13 19.79 19.79 0 01.14 4.36 2 2 0 012.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.91 9.91a16 16 0 006.18 6.18l1.27-.45a2 2 0 012.11.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
+        </div>
+        <div class="ct-lbl">Téléphone</div>
+        <div class="ct-val">
+          <a href="tel:+22901954230 00">+229 01 95 42 30 00</a>
+          <a href="tel:+22901405219 99" class="sec">+229 01 40 52 19 99</a>
+        </div>
+      </div>
+
+      <div class="ct-card">
+        <div class="ct-ic gr">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        </div>
+        <div class="ct-lbl">WhatsApp</div>
+        <div class="ct-val">
+          <a href="https://wa.me/2290196666999">+229 01 96 66 69 99</a>
+          <span class="sec">Réponse rapide garantie</span>
+        </div>
+      </div>
+
+      <div class="ct-card">
+        <div class="ct-ic bl">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        </div>
+        <div class="ct-lbl">Email</div>
+        <div class="ct-val">
+          <a href="mailto:bemymandyl@gmail.com">bemymandyl@gmail.com</a>
+          <span class="sec">Pour devis et projets</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="cta-center">
+      <a href="mailto:fil.bara1988@gmail.com" class="btn btn-navy" style="font-size:.95rem; padding:.88rem 2.25rem; display:inline-flex;">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        Envoyer un email
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer role="contentinfo">
+  <div class="wrap foot-inner">
+    <div class="foot-brand"><span>ETS LGT</span> — Emmanuel M. Y. BANKOLE</div>
+    <div class="foot-copy">© 2026 ETS LGT. Tous droits réservés. Bénin.</div>
+  </div>
+</footer>
+
+<script>
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 30);
+  }, { passive: true });
+</script>
+
+</body>
+</html>
